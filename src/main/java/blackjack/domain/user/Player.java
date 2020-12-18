@@ -1,5 +1,11 @@
 package blackjack.domain.user;
 
+import blackjack.domain.card.Card;
+import blackjack.domain.card.CardDeque;
+import blackjack.domain.card.Cards;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Player {
@@ -8,6 +14,7 @@ public class Player {
 
     private final String name;
     private final long bettingMoney;
+    private final Cards cards = new Cards(new ArrayList<>());
 
     public Player(String name, long bettingMoney) {
         validateName(name);
@@ -30,5 +37,14 @@ public class Player {
         if (bettingMoney < MINIMUM_BETTING_MONEY) {
             throw new PlayerBettingMoneyException(bettingMoney);
         }
+    }
+
+    public void addCard(Card card) {
+        cards.addCard(card);
+    }
+
+    public void drawDefaultCards(CardDeque cardDeque) {
+        List<Card> defaultCards = cardDeque.drawDefaultCards();
+        defaultCards.forEach(this::addCard);
     }
 }

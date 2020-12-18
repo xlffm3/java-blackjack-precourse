@@ -1,5 +1,7 @@
 package blackjack.domain.user;
 
+import blackjack.domain.card.CardDeque;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -36,5 +38,9 @@ public class Players {
         if (playerCounts != distinctPlayerCounts) {
             throw new PlayerDuplicationException();
         }
+    }
+
+    public void drawDefaultCards(CardDeque cardDeque) {
+        players.forEach(player -> player.drawDefaultCards(cardDeque));
     }
 }
