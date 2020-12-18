@@ -40,6 +40,15 @@ public class OutputView {
         System.out.println(DEALER_REDRAW_NOTICE);
     }
 
+    public static void printDealerCardState(List<CardDto> cardDtos, int score) {
+        List<String> playerCards = cardDtos.stream()
+                .map(cardDto -> cardDto.getSymbol().toString() + cardDto.getType().toString())
+                .collect(Collectors.toList());
+        String joinedPlayerCardsWithDelimiter = String.join(COMMA_DELIMITER, playerCards);
+        System.out.printf(PLAYER_CARD_STATE_WITH_SCORE_FORMAT, "딜러", joinedPlayerCardsWithDelimiter, score);
+
+    }
+
     public static void printCardState(List<PlayerDto> players) {
         players.forEach(OutputView::printEachCardStateWithScore);
     }

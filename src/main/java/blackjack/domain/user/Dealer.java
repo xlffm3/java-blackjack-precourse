@@ -29,6 +29,10 @@ public class Dealer {
         cards.addCard(card);
     }
 
+    public int getScore() {
+        return cards.getScore();
+    }
+
     public List<CardDto> getCardDtos() {
         return cards.getCardDtos();
     }
