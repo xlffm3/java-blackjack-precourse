@@ -1,5 +1,7 @@
 package domain.card;
 
+import blackjack.domain.card.Card;
+import blackjack.domain.card.CardFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
