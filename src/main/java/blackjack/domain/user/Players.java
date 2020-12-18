@@ -1,6 +1,7 @@
 package blackjack.domain.user;
 
 import blackjack.domain.card.CardDeque;
+import blackjack.dto.PlayerDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,5 +43,17 @@ public class Players {
 
     public void drawDefaultCards(CardDeque cardDeque) {
         players.forEach(player -> player.drawDefaultCards(cardDeque));
+    }
+
+    public List<PlayerDto> getPlayerDtos() {
+        return players.stream()
+                .map(PlayerDto::from)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getPlayerNames() {
+        return players.stream()
+                .map(Player::getName)
+                .collect(Collectors.toList());
     }
 }

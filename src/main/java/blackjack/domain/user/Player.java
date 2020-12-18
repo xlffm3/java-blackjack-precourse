@@ -3,6 +3,7 @@ package blackjack.domain.user;
 import blackjack.domain.card.Card;
 import blackjack.domain.card.CardDeque;
 import blackjack.domain.card.Cards;
+import blackjack.dto.CardDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,5 +47,13 @@ public class Player {
     public void drawDefaultCards(CardDeque cardDeque) {
         List<Card> defaultCards = cardDeque.drawDefaultCards();
         defaultCards.forEach(this::addCard);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<CardDto> getCardDtos() {
+        return cards.getCardDtos();
     }
 }
