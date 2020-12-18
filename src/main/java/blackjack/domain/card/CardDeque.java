@@ -1,11 +1,11 @@
 package blackjack.domain.card;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CardDeque {
+    private static final int DEFAULT_CARD_COUNTS = 2;
 
     private final Deque<Card> cardDeque;
 
@@ -14,19 +14,26 @@ public class CardDeque {
     }
 
     public static CardDeque initiate() {
-        Deque<Card> cardDeque = new ArrayDeque<>();
-        addCards(cardDeque);
-        return new CardDeque(cardDeque);
+        List<Card> cards = new ArrayList<>();
+        addCards(cards);
+        Collections.shuffle(cards);
+        return new CardDeque(new ArrayDeque<>(cards));
     }
 
-    private static void addCards(Deque<Card> cardDeque) {
+    private static void addCards(List<Card> cards) {
         Arrays.stream(Symbol.values())
                 .flatMap(CardDeque::createCard)
-                .forEach(cardDeque::add);
+                .forEach(cards::add);
     }
 
     private static Stream<Card> createCard(Symbol symbol) {
         return Arrays.stream(Type.values())
                 .map(type -> new Card(symbol, type));
+    }
+
+    public List<Card> drawDefaultCards() {
+        return Stream.generate(cardDeque::pop)
+                .limit(DEFAULT_CARD_COUNTS)
+                .collect(Collectors.toList());
     }
 }
