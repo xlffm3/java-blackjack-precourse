@@ -3,6 +3,7 @@ package blackjack.domain.user;
 import blackjack.domain.card.CardDeque;
 import blackjack.dto.PlayerDto;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -43,6 +44,10 @@ public class Players {
 
     public void drawDefaultCards(CardDeque cardDeque) {
         players.forEach(player -> player.drawDefaultCards(cardDeque));
+    }
+
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(players);
     }
 
     public List<PlayerDto> getPlayerDtos() {

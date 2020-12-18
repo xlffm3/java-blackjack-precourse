@@ -17,6 +17,12 @@ public class Cards {
         cards.add(card);
     }
 
+    public int getScoreTotal() {
+        return cards.stream()
+                .mapToInt(Card::getScore)
+                .sum();
+    }
+
     public List<CardDto> getCardDtos() {
         return cards.stream()
                 .map(CardDto::from)

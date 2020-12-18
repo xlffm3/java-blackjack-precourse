@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Player {
     private static final int MINIMUM_NAME_LENGTH = 2;
     private static final int MINIMUM_BETTING_MONEY = 1;
+    private static final int MAXIMUM_SCORE_TOTAL = 21;
 
     private final String name;
     private final long bettingMoney;
@@ -40,13 +41,22 @@ public class Player {
         }
     }
 
-    public void addCard(Card card) {
+    private void addCard(Card card) {
         cards.addCard(card);
     }
 
     public void drawDefaultCards(CardDeque cardDeque) {
         List<Card> defaultCards = cardDeque.drawDefaultCards();
         defaultCards.forEach(this::addCard);
+    }
+
+    public void drawCard(CardDeque cardDeque) {
+        Card card = cardDeque.drawCard();
+        addCard(card);
+    }
+
+    public boolean isAbleToDrawCard() {
+        return cards.getScoreTotal() <= MAXIMUM_SCORE_TOTAL;
     }
 
     public String getName() {
