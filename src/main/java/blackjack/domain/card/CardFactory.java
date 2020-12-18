@@ -8,6 +8,9 @@ import java.util.stream.Stream;
 
 public class CardFactory {
 
+    private CardFactory() {
+    }
+
     public static List<Card> createCards() {
         List<Card> cards = new ArrayList<>();
         Arrays.stream(Symbol.values())
