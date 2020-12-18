@@ -57,4 +57,12 @@ public class Cards {
     public boolean hasScoreLessOrEqual(int score) {
         return getScore() <= score;
     }
+
+    public boolean hasScoreGreater(int score) {
+        return getScore() > score;
+    }
+
+    public boolean hasScoreEqual(int playerScore) {
+        return getScore() == playerScore;
+    }
 }
