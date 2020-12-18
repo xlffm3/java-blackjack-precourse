@@ -27,14 +27,14 @@ public class InputView {
     }
 
     public List<Long> inputBettingMoney(List<String> playerNames) {
-        List<Long> bettingMoney = new ArrayList<>();
-        playerNames.forEach(playerName -> inputEachBettingMoney(playerName, bettingMoney));
-        return bettingMoney;
+        List<Long> bettingMoneys = new ArrayList<>();
+        playerNames.forEach(playerName -> inputEachBettingMoney(playerName, bettingMoneys));
+        return bettingMoneys;
     }
 
-    private void inputEachBettingMoney(String playerName, List<Long> bettingMoney) {
+    private void inputEachBettingMoney(String playerName, List<Long> bettingMoneys) {
         System.out.printf(INPUT_BETTING_MONEY_NOTICE, playerName);
         long playerBettingMoney = Long.parseLong(scanner.nextLine());
-        bettingMoney.add(playerBettingMoney);
+        bettingMoneys.add(playerBettingMoney);
     }
 }
