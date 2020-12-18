@@ -61,4 +61,10 @@ public class Players {
                 .map(Player::getName)
                 .collect(Collectors.toList());
     }
+
+    public List<Integer> calculateProfits(Dealer dealer) {
+        return players.stream()
+                .map(player -> player.calculateResult(dealer))
+                .collect(Collectors.toList());
+    }
 }

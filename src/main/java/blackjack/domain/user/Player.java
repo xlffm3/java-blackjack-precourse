@@ -13,6 +13,9 @@ public class Player {
     private static final int MINIMUM_NAME_LENGTH = 2;
     private static final int MINIMUM_BETTING_MONEY = 1;
     private static final int MAXIMUM_SCORE_TOTAL = 21;
+    private static final int ZERO_PROFIT = 0;
+    private static final int LOSS_PROFIT = -1;
+    private static final double BLACKJACK_PROFIT_RATIO = 1.5;
 
     private final String name;
     private final long bettingMoney;
@@ -56,7 +59,45 @@ public class Player {
     }
 
     public boolean isAbleToDrawCard() {
-        return cards.getScore() <= MAXIMUM_SCORE_TOTAL;
+        return cards.hasScoreLessOrEqual(MAXIMUM_SCORE_TOTAL);
+    }
+
+    public int getScore() {
+        return cards.getScore();
+    }
+
+    public int calculateResult(Dealer dealer) {
+        if (dealer.isBlackJack()) {
+            return calculateIfDealerIsBlackJack();
+        }
+        if (dealer.isBust() && !cards.isBust()) {
+            return (int) bettingMoney;
+        }
+        if (cards.isBlackJack()) {
+            return (int) (bettingMoney * BLACKJACK_PROFIT_RATIO);
+        }
+        if (cards.isBust()) {
+            return (int) bettingMoney * LOSS_PROFIT;
+        }
+        return calculate(dealer);
+    }
+
+    private int calculate(Dealer dealer) {
+        int playerScore = getScore();
+        if (dealer.hasScoreGreater(playerScore)) {
+            return (int) (bettingMoney * LOSS_PROFIT);
+        }
+        if (dealer.hasScoreEqual(playerScore)) {
+            return ZERO_PROFIT;
+        }
+        return (int) bettingMoney;
+    }
+
+    private int calculateIfDealerIsBlackJack() {
+        if (cards.isBlackJack()) {
+            return ZERO_PROFIT;
+        }
+        return (int) bettingMoney * LOSS_PROFIT;
     }
 
     public String getName() {
