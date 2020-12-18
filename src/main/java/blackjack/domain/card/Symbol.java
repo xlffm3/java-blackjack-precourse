@@ -23,6 +23,10 @@ public enum Symbol {
         this.initialLetter = initialLetter;
     }
 
+    public boolean isAce() {
+        return this == ACE;
+    }
+
     public int getScore() {
         return score;
     }

@@ -56,7 +56,7 @@ public class Player {
     }
 
     public boolean isAbleToDrawCard() {
-        return cards.getScoreTotal() <= MAXIMUM_SCORE_TOTAL;
+        return cards.getScore() <= MAXIMUM_SCORE_TOTAL;
     }
 
     public String getName() {

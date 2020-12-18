@@ -37,6 +37,6 @@ public class Dealer {
     }
 
     public boolean isAbleToDrawCard() {
-        return cards.getScoreTotal() <= MAXIMUM_REDRAW_SCORE_TOTAL;
+        return cards.getScore() <= MAXIMUM_REDRAW_SCORE_TOTAL;
     }
 }

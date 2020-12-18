@@ -17,10 +17,19 @@ public class Cards {
         cards.add(card);
     }
 
-    public int getScoreTotal() {
-        return cards.stream()
+    public int getScore() {
+        int score = cards.stream()
                 .mapToInt(Card::getScore)
                 .sum();
+        if (containsAce() && score <= 11) {
+            return score + 10;
+        }
+        return score;
+    }
+
+    private boolean containsAce() {
+        return cards.stream()
+                .anyMatch(Card::isAce);
     }
 
     public List<CardDto> getCardDtos() {
